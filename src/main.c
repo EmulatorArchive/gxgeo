@@ -49,6 +49,8 @@ static LIST *pdriver_list		= NULL;
 static LIST *pdriver_path_list	= NULL;
 extern Uint8 *joy_touse[4];
 
+extern int player_channel[2];
+
 void calculate_hotkey_bitmasks()
 {
 #if 0
@@ -206,7 +208,7 @@ DRIVER *list_rom_loop(char **romname)
 void return_to_wii_menu(void)
 {
 	/* if *0x80001800 is 0 then restart*/
-	if (*((u32*)0x80001800) == 0) SYS_ResetSystem(SYS_RETURNTOMENU,0,0);
+	if (!*((u32*)0x80001800)) SYS_ResetSystem(SYS_RETURNTOMENU,0,0);
 }
 
 int main(int argc, char **argv)
@@ -287,8 +289,11 @@ int main(int argc, char **argv)
 		
 		if (conf.debug) conf.sound=0;
 		
+    player_channel[0]= CF_VAL(cf_get_item_by_name("player1"));
+    player_channel[1]= CF_VAL(cf_get_item_by_name("player2"));
+    
 		/* start emulation loop */
-	    if (conf.debug) debug_loop();
+	  if (conf.debug) debug_loop();
 	    else main_loop();
 		save_nvram(conf.game);
 		save_memcard(conf.game);

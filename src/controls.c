@@ -21,6 +21,8 @@
 #include "controls.h"
 #include "types.h"
 
+int player_channel[2];
+
 static int joystick_direction[2][4];
 
 unsigned int *joy_touse[4];
@@ -39,6 +41,8 @@ void init_input(void)
   joystick_direction[1][1] = 0;
   joystick_direction[1][2] = 0;
   joystick_direction[1][3] = 0;
+  player_channel[0] = 0;
+  player_channel[1] = 0;
 }
 
 int read_mask_input_wiimote(unsigned int channel, int *data)
@@ -115,7 +119,7 @@ int read_mask_input_wiimote(unsigned int channel, int *data)
   return exp_data.type;
 }
 
-void read_mask_input_gc(unsigned int gcpad, int *data)
+int read_mask_input_gc(unsigned int gcpad, int *data)
 {
   *data = 0;
   u16 pressedgc = PAD_ButtonsDown(gcpad);
@@ -145,6 +149,7 @@ void read_mask_input_gc(unsigned int gcpad, int *data)
   *data       |= ( pressedgc & PAD_BUTTON_UP?GCDDOWN:0 );
   *data       |= ( pressedgc & PAD_BUTTON_LEFT?GCDLEFT:0 );
   *data       |= ( pressedgc & PAD_BUTTON_RIGHT?GCDRIGHT:0 );
+  return GCPAD;
 }
 
 unsigned int last_keys[] = { 0, 0 };
@@ -156,31 +161,35 @@ int read_input(unsigned char joy[2][BUTTON_MAX], int held)
 {
   int keys = 0;
   int i;
-  int channel = 0;
-  for (channel = 0; channel < 2; channel++) {
-    
-	/* Read current state of keys on channel */
-    int touse = read_mask_input_wiimote(channel, &keys);  
-    
-	/* check to see if keys have changed, if required */
-	if (held) { 
-		int keys_x = keys & (~last_keys[channel]);
-		last_keys[channel] = keys;
-		keys = keys_x;
-	}
-    
-	/* fixed exit condition */
-	int to_exit = 0;
+  int wii_channel = 0;
+  int player = 0;
+  for (player = 0; player < 2; player++) {
+    int touse = 0;  
+    /* Read current state of keys on channel */
+    if (player_channel[player] > 4 || player_channel[player] < 0) player_channel[player] = 0;
+    if (player_channel[player] == 0) touse = read_mask_input_wiimote(wii_channel++, &keys); 
+    else touse = read_mask_input_gc(player_channel[player], &keys);
+    /* check to see if keys have changed, if required */
+    if (held) { 
+      int keys_x = keys & (~last_keys[player]);
+      last_keys[player] = keys;
+      keys = keys_x;
+    }
+      
+    /* fixed exit condition */
+    int to_exit = 0;
     if (touse == WPAD_EXP_NUNCHUK || touse == WPAD_EXP_NONE) if (keys & WIHOME) to_exit = 1;
-    if (touse == WPAD_EXP_CLASSIC) if (keys & CLHOME) to_exit = 1;	
-	int home_key_x = to_exit & (~home_key);
-	home_key = to_exit;
-	to_exit = home_key_x;
-	if (to_exit) return 1;
+    if (touse == WPAD_EXP_CLASSIC) if (keys & CLHOME) to_exit = 1;
+    if (touse == GCPAD) if ((keys & GCLTRIG) && (keys & GCRTRIG)) to_exit = 1;
     
+    int home_key_x = to_exit & (~home_key);
+    home_key = to_exit;
+    to_exit = home_key_x;
+    if (to_exit) return 1;
+      
 	/* touse is -1 when a channel is not connected, touse is the index of the array of controls */
     if (touse < 0) touse = 0;
-    for (i = 0; i < BUTTON_MAX; i++) joy[channel][i] = ((keys & joy_touse[touse][i]) != 0?1:0);
+    for (i = 0; i < BUTTON_MAX; i++) joy[player][i] = ((keys & joy_touse[touse][i]) != 0?1:0);
   }
   
   return 0;

@@ -348,6 +348,10 @@ void cf_init(void)
     cf_create_array_item("classic_key","Classic Controller Key configuration",0,BUTTON_MAX, CLASSIC_DEFAULT);
     cf_create_array_item("gcpad_key","Gamecube Controller Key configuration",0,BUTTON_MAX, GCPAD_DEFAULT);
     
+    /* 0 = Wiimote, 1 = 1st GC, 2 = 2nd GC, etc. up to 4 */
+    cf_create_int_item("player1","Player One controller option",0,0);
+    cf_create_int_item("player2","Gamecube Controller Key configuration",0,0);
+    
     /*
     cf_create_array_item("p1key","Player1 Keyboard configuration",0,14,default_key1);
     cf_create_array_item("p2key","Player2 Keyboard configuration",0,14,default_key2);
