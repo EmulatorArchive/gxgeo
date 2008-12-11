@@ -220,7 +220,7 @@ int main(int argc, char **argv)
     char *system;
 	  
     /* must be the first thing to do */
-    fatInit(8, false);	
+    fatInitDefault();	
 
     screen_init(); /* Setup GX and enable the console. */
     

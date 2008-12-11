@@ -15,28 +15,28 @@ include $(DEVKITPPC)/wii_rules
 # SOURCES is a list of directories containing source code
 # INCLUDES is a list of directories containing extra header files
 #---------------------------------------------------------------------------------
-TARGET		:=	gxgeo
+TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	src/generator68k \
-				      src/mamez80 \
-				      src/ym2610 \
-				      src/pd4990a \
-				      src/interface \
-				      src 
-					  
-DATA		:=	 
-INCLUDES	:=	
+							src/mamez80 \
+							src/ym2610 \
+							src/pd4990a \
+							src/interface \
+							src
+DATA		:=	
+INCLUDES	:=
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS		= 	-g -O2 -Wall $(MACHDEP) $(INCLUDE) \
+CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE) \
 				-DWII -DGFX_MAN -DVERSION="\"1.0b-WII\"" \
 				-DDATA_DIRECTORY="\"fat:/gxgeo\"" \
 				-DWORDS_BIGENDIAN
 CXXFLAGS	=	$(CFLAGS)
-LDFLAGS		=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
+
+LDFLAGS	=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
 
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
@@ -47,7 +47,7 @@ LIBS	:=	-lz -lfat -lwiiuse -lbte -logc -lm
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:=	
+LIBDIRS	:=
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -78,7 +78,7 @@ BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
 ifeq ($(strip $(CPPFILES)),)
 	export LD	:=	$(CC)
 else
-	export LD	:=	$(CXX) 
+	export LD	:=	$(CXX)
 endif
 
 export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
@@ -96,7 +96,8 @@ export INCLUDE	:=	$(foreach dir,$(INCLUDES), -iquote $(CURDIR)/$(dir)) \
 #---------------------------------------------------------------------------------
 # build a list of library paths
 #---------------------------------------------------------------------------------
-export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) -L$(LIBOGC_LIB) 
+export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib) \
+					-L$(LIBOGC_LIB)
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 .PHONY: $(BUILD) clean
@@ -105,22 +106,17 @@ export OUTPUT	:=	$(CURDIR)/$(TARGET)
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-	@powerpc-gekko-objcopy -O binary $(TARGET).elf $(TARGET).dol
-#@rm $(TARGET).elf
 
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(OUTPUT).*
+	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).dol
 
 #---------------------------------------------------------------------------------
 run:
-	@wiiload $(TARGET).dol mslug
+	wiiload $(TARGET).dol
 
-install:
-	@$(STRIP) $(TARGET).dol
-#  @powerpc-gekko-objcopy -O binary $(TARGET).elf $(TARGET).dol
-	@mv $(OUTPUT).dol apps/gxgeo/boot.dol
+
 #---------------------------------------------------------------------------------
 else
 
@@ -129,9 +125,8 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-# $(OUTPUT).dol: $(OUTPUT).elf
+$(OUTPUT).dol: $(OUTPUT).elf
 $(OUTPUT).elf: $(OFILES)
-
 
 #---------------------------------------------------------------------------------
 # This rule links in binary data with the .jpg extension
