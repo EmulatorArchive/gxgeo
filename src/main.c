@@ -235,6 +235,18 @@ int main(int argc, char **argv)
     init_joystick();
     
 	printf ("\x1b[%d;%dH", 4, 0 );
+  
+  /* print vmode struct */
+  /*
+  printf("%s\t: 0x%08X\n", "viTVMode", vmode->viTVMode);
+  printf("%s\t: %d\n", "fbWidth", vmode->fbWidth);
+  printf("%s\t: %d\n", "efbHeight", vmode->efbHeight);
+  printf("%s\t: %d\n", "xfbHeight ", vmode->xfbHeight);
+  printf("%s\t: %d\n", "viXOrigin ", vmode->viXOrigin);
+  printf("%s\t: %d\n", "viYOrigin", vmode->viYOrigin);
+  printf("%s\t: %d\n", "viWidth", vmode->viWidth);
+  printf("%s\t: %d\n", "viHeight", vmode->viHeight);
+  */
 	
 	bool passed = false;	
     /* load all the drivers */
@@ -256,7 +268,7 @@ int main(int argc, char **argv)
 	for (;;) {
 		screen_restart();
 		while(!passed) {
-			if (!rom_list_loaded) { load_driver_list(DATA_DIRECTORY"/roms"); rom_list_loaded = true; }
+			if (!rom_list_loaded) { printf ("\x1b[%d;%dH", 4, 0 ); load_driver_list(DATA_DIRECTORY"/roms"); rom_list_loaded = true; }
 			dr = list_rom_loop(&rom_name);
 			printf ("\x1b[%d;%dH", 4, 0 );
 			/* try and open a config file <romname>.cf in the conf folder */

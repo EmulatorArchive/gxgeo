@@ -36,7 +36,7 @@ bool screen_init()
 
 void screen_update() { 
   if (GX_started == 0) {
-    GX_Start(vmode->fbWidth, vmode->xfbHeight, 320, 240);
+    GX_Start(buffer.viewport.w, buffer.viewport.h, (int)(((double)buffer.viewport.w/(double)buffer.viewport.h)*(double)vmode->viHeight)/2, vmode->viHeight/2); 
     GX_started = 1;
   }
   GX_Render2(&buffer);
