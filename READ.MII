@@ -1,0 +1,71 @@
+/************************************************************
+ * GxGeo                                                    *
+ *   by Blizzo                                              *
+ ************************************************************/
+
+-[ SOURCE CODE ]-
+
+  I'd rather not release messy source code with probably more 
+  than a few mistakes in it, but if you you'd like it drop me
+  a line on:
+    http://wiinewz.com/forums/members/blizzo.html or
+    http://gbatemp.net/index.php?showuser=142966&CODE=1337 or
+    http://www.dcemu.co.uk/vbulletin/member.php?u=39336648
+ 
+-[ INSTALLATION ]-
+
+  Extract the zip on to your SD card :
+    /sd/apps/gxgeo
+    /sd/gxgeo/conf
+    /sd/gxgeo/romrc
+    /sd/gxgeo/roms
+    /sd/gxgeo/save
+
+  The romrc contains information about ROM sets, if you only 
+  put the .rc files for the ROMs you have in that folder gxgeo
+  will load faster :)
+    
+  Your ROMs (zipped) and BIOS (unzipped) files should go in /sd/gxgeo/roms
+    required files
+      000-lo.lo (ng-lo.rom)
+      sfix.sfx  (ng-sfix.rom)
+    country files (neo-geo.rom)
+      usa_2slt.bin  - USA
+      vs-bios.rom   - Japan
+      asia-s3.rom   - Asia
+      sp-s2.sp1     - Europe 
+    system files
+      aes-bios.bin - A.E.S: 
+      uni-bios.rom - Uni Bios
+
+-[ CONTROLS ]-
+
+  You can use any of the following:
+    Wiimote sideways
+    Wiimote + Nunchuck
+    Classic Controller (untested)
+    Gamecube Controller
+
+  The Quit button will make the emulator quit right away,
+  there is no in game menu.
+    
+  The Gamecube controller takes priority over the Wiimote,
+  if you have a GC controller in port 1 then the GC Controller
+  will control player 1 and the Wiimote will control player 2.
+  
+  |------------------------------------------------------|
+  | NeoGeo || Wiimote  | Wiimote  | Classic    | GC  PAD |
+  |        || Sideways | Nunchuck | Controller |         |
+  |------------------------------------------------------|
+  | A      || 1        | A        | A          | A       |
+  | B      || 2        | B        | B          | B       |
+  | C      || A        | Z        | X          | X       |
+  | D      || B        | C        | Y          | Y       |
+  | UP     || UP       | UP       | UP         | UP      |
+  | DOWN   || DOWN     | DOWN     | DOWN       | DOWN    |
+  | LEFT   || LEFT     | LEFT     | LEFT       | LEFT    |
+  | RIGHT  || RIGHT    | RIGHT    | RIGHT      | RIGHT   |
+  | COIN   || MINUS    | MINUS    | MINUS      | Z       |
+  | START  || PLUS     | PLUS     | PLUS       | START   |
+  | QUIT   || HOME     | HOME     | HOME       | LT + RT |
+  |------------------------------------------------------|
