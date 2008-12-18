@@ -90,18 +90,8 @@ int read_mask_input_wiimote(unsigned int channel, int *data)
       *data       |= ( pressedc & CLASSIC_CTRL_BUTTON_ZL?CLLSHOULDER:0 );
       *data       |= ( pressedc & CLASSIC_CTRL_BUTTON_FULL_R?CLRTRIG:0 );
       *data       |= ( pressedc & CLASSIC_CTRL_BUTTON_FULL_L?CLLTRIG:0 );
+      return CLASSIC;
     } else {
-      if (exp_data.type == WPAD_EXP_NUNCHUK) {  /* If there is a nunchuck do this */
-        int pressedn = wd->exp.nunchuk.btns_held;
-        double x_pos = 2*((double)(exp_data.nunchuk.js.pos.x - exp_data.nunchuk.js.min.x) / (double)(exp_data.nunchuk.js.max.x - exp_data.nunchuk.js.min.x)) - 1.0;
-        double y_pos = 2*((double)(exp_data.nunchuk.js.pos.y - exp_data.nunchuk.js.min.y) / (double)(exp_data.nunchuk.js.max.y - exp_data.nunchuk.js.min.y)) - 1.0;
-        *data       |= ( pressedn & NUNCHUK_BUTTON_Z?NUZ:0 );
-        *data       |= ( pressedn & NUNCHUK_BUTTON_C?NUC:0 );
-        *data       |= ( (y_pos <= -0.5)?NUSDOWN:0 );
-        *data       |= ( (y_pos >= 0.5)?NUSUP:0 );
-        *data       |= ( (x_pos <= -0.5)?NUSLEFT:0 );
-        *data       |= ( (x_pos >= 0.5)?NUSRIGHT:0 );
-      }
       *data       |= ( pressed & WPAD_BUTTON_1?WI1:0 );
       *data       |= ( pressed & WPAD_BUTTON_2?WI2:0 );
       *data       |= ( pressed & WPAD_BUTTON_A?WIA:0 );
@@ -113,16 +103,30 @@ int read_mask_input_wiimote(unsigned int channel, int *data)
       *data       |= ( pressed & WPAD_BUTTON_LEFT?WILEFT:0 );
       *data       |= ( pressed & WPAD_BUTTON_UP?WIUP:0 );
       *data       |= ( pressed & WPAD_BUTTON_DOWN?WIDOWN:0 );
+      if (exp_data.type == WPAD_EXP_NUNCHUK) {  /* If there is a nunchuck do this */
+        int pressedn = wd->exp.nunchuk.btns_held;
+        double x_pos = 2*((double)(exp_data.nunchuk.js.pos.x - exp_data.nunchuk.js.min.x) / (double)(exp_data.nunchuk.js.max.x - exp_data.nunchuk.js.min.x)) - 1.0;
+        double y_pos = 2*((double)(exp_data.nunchuk.js.pos.y - exp_data.nunchuk.js.min.y) / (double)(exp_data.nunchuk.js.max.y - exp_data.nunchuk.js.min.y)) - 1.0;
+        *data       |= ( pressedn & NUNCHUK_BUTTON_Z?NUZ:0 );
+        *data       |= ( pressedn & NUNCHUK_BUTTON_C?NUC:0 );
+        *data       |= ( (y_pos <= -0.5)?NUSDOWN:0 );
+        *data       |= ( (y_pos >= 0.5)?NUSUP:0 );
+        *data       |= ( (x_pos <= -0.5)?NUSLEFT:0 );
+        *data       |= ( (x_pos >= 0.5)?NUSRIGHT:0 );
+        return NUNCHUK;
+      }
+      return WIIMOTE;
     }
   }
   
-  return exp_data.type;
+  return -1;
 }
 
 int read_mask_input_gc(unsigned int gcpad, int *data)
 {
   *data = 0;
-  u16 pressedgc = PAD_ButtonsDown(gcpad);
+  PAD_ScanPads();
+  u16 pressedgc = PAD_ButtonsHeld(gcpad);
 
   double x_pos = 2*((double)(PAD_StickX(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
   double y_pos = 2*((double)(PAD_StickY(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
@@ -155,40 +159,45 @@ int read_mask_input_gc(unsigned int gcpad, int *data)
 unsigned int last_keys[] = { 0, 0 };
 unsigned char home_key = 0;
 
-char *GEO_BUTTONS[] = { "A", "B", "C", "D", "UP", "DOWN", "LEFT", "RIGHT", "START", "COIN"  };
+char *GEO_BUTTONS[] = { "A", "B", "C", "D", "UP", "DOWN", "LEFT", "RIGHT", "START", "COIN" };
     
 int read_input(unsigned char joy[2][BUTTON_MAX], int held)
 {
   int keys = 0;
   int i;
   int wii_channel = 0;
-  int player = 0;
-  for (player = 0; player < 2; player++) {
+  int player;
+  for (player = 0; player < 2; player++)
+  {
     int touse = 0;  
+    
     /* Read current state of keys on channel */
     if (player_channel[player] > 4 || player_channel[player] < 0) player_channel[player] = 0;
-    if (player_channel[player] == 0) touse = read_mask_input_wiimote(wii_channel++, &keys); 
-    else touse = read_mask_input_gc(player_channel[player], &keys);
+    if (player_channel[player] == 0) touse = read_mask_input_wiimote(wii_channel++, &keys);
+    else touse = read_mask_input_gc(player_channel[player]-1, &keys);
+    
     /* check to see if keys have changed, if required */
-    if (held) { 
+    if (held) {
       int keys_x = keys & (~last_keys[player]);
       last_keys[player] = keys;
+      /* gamecube controller hax0r  */
+      keys_x |= (keys & (GCLTRIG | GCRTRIG));
       keys = keys_x;
     }
       
     /* fixed exit condition */
     int to_exit = 0;
-    if (touse == WPAD_EXP_NUNCHUK || touse == WPAD_EXP_NONE) if (keys & WIHOME) to_exit = 1;
-    if (touse == WPAD_EXP_CLASSIC) if (keys & CLHOME) to_exit = 1;
-    if (touse == GCPAD) if ((keys & GCLTRIG) && (keys & GCRTRIG)) to_exit = 1;
+    if (touse == NUNCHUK || touse == WIIMOTE) if (keys & WIHOME) to_exit = 1;
+    if (touse == CLASSIC) if (keys & CLHOME) to_exit = 1;
+    if (touse == GCPAD) if ((keys & GCLTRIG) && (keys & GCRTRIG)) to_exit = 1;    
+    if (touse == -1) break;
     
     int home_key_x = to_exit & (~home_key);
     home_key = to_exit;
     to_exit = home_key_x;
     if (to_exit) return 1;
       
-	/* touse is -1 when a channel is not connected, touse is the index of the array of controls */
-    if (touse < 0) touse = 0;
+    /* touse is -1 when a channel is not connected, touse is the index of the array of controls */
     for (i = 0; i < BUTTON_MAX; i++) joy[player][i] = ((keys & joy_touse[touse][i]) != 0?1:0);
   }
   

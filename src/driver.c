@@ -455,49 +455,44 @@ static int zfread_alternate(unzFile * f, void *buffer, int length, int inc)
     return totread;
 }
 
-bool dr_load_section(unzFile *gz, SECTION s, Uint8 *current_buf) {
+  bool dr_load_section(unzFile *gz, SECTION s, Uint8 *current_buf) {
     LIST *l;
     for(l=s.item;l;l=l->next) {
-	SECTION_ITEM *item=l->data;
-    
-	if (strcmp(item->filename,"-")!=0) {
-	    /* nouveau fichier, on l'ouvre */
-	    if (unzLocateFile(gz, item->filename, 2) == UNZ_END_OF_LIST_OF_FILE) {
-		unzClose(gz);
-		return false;
-	    }
-	    if (unzOpenCurrentFile(gz) != UNZ_OK) {
-		unzClose(gz);
-		return false;
-	    }
-	}
-	create_progress_bar(item->filename);
-	if (item->type==LD_ALTERNATE)
-	    zfread_alternate(gz, current_buf + item->begin, item->size, 2);
-	else
-	    zfread(gz, current_buf + item->begin, item->size);
+      SECTION_ITEM *item=l->data;
+
+      if (strcmp(item->filename,"-")!=0)
+      {
+        if ((unzLocateFile(gz, item->filename, 2) == UNZ_END_OF_LIST_OF_FILE) || (unzOpenCurrentFile(gz) != UNZ_OK))
+        {
+          unzClose(gz);
+          return false;
+        }
+      }
+      create_progress_bar(item->filename);
+      if (item->type==LD_ALTERNATE) zfread_alternate(gz, current_buf + item->begin, item->size, 2);
+      else zfread(gz, current_buf + item->begin, item->size);
     }
     return true;
-}
+  }
 
 void set_bankswitchers(BANKSW_TYPE bt) {
     switch(bt) {
-	    case BANKSW_NORMAL:
-			mem68k_fetch_bksw_byte=mem68k_fetch_bk_normal_byte;
-			mem68k_fetch_bksw_word=mem68k_fetch_bk_normal_word;
-			mem68k_fetch_bksw_long=mem68k_fetch_bk_normal_long;
-			mem68k_store_bksw_byte=mem68k_store_bk_normal_byte;
-			mem68k_store_bksw_word=mem68k_store_bk_normal_word;
-			mem68k_store_bksw_long=mem68k_store_bk_normal_long;
-		break;
-	    case BANKSW_KOF2003:
-			mem68k_fetch_bksw_byte=mem68k_fetch_bk_kof2003_byte;
-			mem68k_fetch_bksw_word=mem68k_fetch_bk_kof2003_word;
-			mem68k_fetch_bksw_long=mem68k_fetch_bk_kof2003_long;
-			mem68k_store_bksw_byte=mem68k_store_bk_kof2003_byte;
-			mem68k_store_bksw_word=mem68k_store_bk_kof2003_word;
-			mem68k_store_bksw_long=mem68k_store_bk_kof2003_long;
-		break;
+      case BANKSW_NORMAL:
+            mem68k_fetch_bksw_byte=mem68k_fetch_bk_normal_byte;
+            mem68k_fetch_bksw_word=mem68k_fetch_bk_normal_word;
+            mem68k_fetch_bksw_long=mem68k_fetch_bk_normal_long;
+            mem68k_store_bksw_byte=mem68k_store_bk_normal_byte;
+            mem68k_store_bksw_word=mem68k_store_bk_normal_word;
+            mem68k_store_bksw_long=mem68k_store_bk_normal_long;
+            break;
+      case BANKSW_KOF2003:
+            mem68k_fetch_bksw_byte=mem68k_fetch_bk_kof2003_byte;
+            mem68k_fetch_bksw_word=mem68k_fetch_bk_kof2003_word;
+            mem68k_fetch_bksw_long=mem68k_fetch_bk_kof2003_long;
+            mem68k_store_bksw_byte=mem68k_store_bk_kof2003_byte;
+            mem68k_store_bksw_word=mem68k_store_bk_kof2003_word;
+            mem68k_store_bksw_long=mem68k_store_bk_kof2003_long;
+            break;
     }
 }
 
@@ -608,7 +603,8 @@ bool dr_load_game(DRIVER *dr,char *name) {
 	    sprintf(dump_name,"%s/%s.gfx",DATA_DIRECTORY"/roms",dr->name);
 		/* load the dump, if it cannot be loaded the function returns false */
 		if ( init_gfx_manager(dump_name, memory.gfx_size) ) {
-			if (read_pen_usage(memory.pen_usage)) memory.mapped = 1;
+      if (read_pen_usage(memory.pen_usage))
+        memory.mapped = 1;
 		}
 		if (!memory.mapped) {
 			printf("\n\t\tUnable to load ROMSET. Sucks huh?\n");

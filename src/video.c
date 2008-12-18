@@ -120,6 +120,8 @@ void convert_tile(int tileno)
 	if (!memory.gfx) gfxdata = (unsigned int *)get_tile(tileno);
 	else gfxdata = (unsigned int *)&memory.gfx[ tileno << 7 ];
   
+    memory.pen_usage[tileno] = 0;
+  
     memcpy(swap,gfxdata,128);
 
     filed=1;
@@ -138,7 +140,7 @@ void convert_tile(int tileno)
             memory.pen_usage[tileno]  |= (1 << pen);
         }
 
-		if (memory.gfx) *(gfxdata++) = dw;
+		/*if (memory.gfx)*/ *(gfxdata++) = dw;
      
         dw = 0;
         for (x = 0;x < 8;x++)
@@ -152,7 +154,7 @@ void convert_tile(int tileno)
             memory.pen_usage[tileno]  |= (1 << pen);
         }
 
-		if (memory.gfx) *(gfxdata++) = dw;
+		/*if (memory.gfx)*/ *(gfxdata++) = dw;
     }
     /* TODO: CHECK if it is really faster...
       if (filed==1) {
@@ -337,7 +339,8 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
+                    
                     br[0]=paldata[(myword>>0)&0xf];
                     br[1]=paldata[(myword>>4)&0xf];
                     br[2]=paldata[(myword>>8)&0xf];
@@ -346,7 +349,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                     br[5]=paldata[(myword>>20)&0xf];
                     br[6]=paldata[(myword>>24)&0xf];
                     br[7]=paldata[(myword>>28)&0xf];
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     br[8]=paldata[(myword>>0)&0xf];
                     br[9]=paldata[(myword>>4)&0xf];
                     br[10]=paldata[(myword>>8)&0xf];
@@ -371,7 +374,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                 for(y=0;y<zy;y++) {
                     
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
 					br[0]=paldata[(myword>>0)&0xf];
                     br[1]=paldata[(myword>>4)&0xf];
                     br[2]=paldata[(myword>>8)&0xf];
@@ -380,7 +383,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                     br[5]=paldata[(myword>>20)&0xf];
                     br[6]=paldata[(myword>>24)&0xf];
                     br[7]=paldata[(myword>>28)&0xf];
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     br[8]=paldata[(myword>>0)&0xf];
                     br[9]=paldata[(myword>>4)&0xf];
                     br[10]=paldata[(myword>>8)&0xf];
@@ -408,7 +411,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     br[0]=paldata[(myword>>28)&0xf];
                     br[1]=paldata[(myword>>24)&0xf];
                     br[2]=paldata[(myword>>20)&0xf];
@@ -418,7 +421,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                     br[6]=paldata[(myword>>4)&0xf];
                     br[7]=paldata[(myword>>0)&0xf];
 	      
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     br[8]=paldata[(myword>>28)&0xf];
                     br[9]=paldata[(myword>>24)&0xf];
                     br[10]=paldata[(myword>>20)&0xf];
@@ -442,7 +445,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                    br[0]=paldata[(myword>>28)&0xf];
                     br[1]=paldata[(myword>>24)&0xf];
                     br[2]=paldata[(myword>>20)&0xf];
@@ -452,7 +455,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                     br[6]=paldata[(myword>>4)&0xf];
                     br[7]=paldata[(myword>>0)&0xf];
 	      
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     br[8]=paldata[(myword>>28)&0xf];
                     br[9]=paldata[(myword>>24)&0xf];
                     br[10]=paldata[(myword>>20)&0xf];
@@ -482,7 +485,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     if (dda_x_skip[ 0]) {if ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[ 1]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[ 2]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
@@ -492,7 +495,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                     if (dda_x_skip[ 6]) {if  ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[ 7]) {if  ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
 
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     if (dda_x_skip[ 8]) {if  ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[ 9]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[10]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
@@ -512,7 +515,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     if (dda_x_skip[ 0]) {if  ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 1]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 2]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -522,7 +525,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                     if (dda_x_skip[ 6]) {if  ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 7]) {if  ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
 
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     if (dda_x_skip[ 8]) {if  ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 9]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[10]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -547,7 +550,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                 for(y=0;y<zy;y++) {
 
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     if (dda_x_skip[ 0]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 1]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 2]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -557,7 +560,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                     if (dda_x_skip[ 6]) {if ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 7]) {if ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
 	      
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     if (dda_x_skip[ 8]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 9]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[10]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -578,7 +581,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                 for(y=0;y<zy;y++) {
 
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     if (dda_x_skip[ 0]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 1]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 2]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -588,7 +591,7 @@ static __inline__ void draw_tile_full(unsigned int tileno,int sx,int sy,int zx,i
                     if (dda_x_skip[ 6]) {if ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 7]) {if ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
 	      
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     if (dda_x_skip[ 8]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 9]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[10]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 

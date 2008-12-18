@@ -6,7 +6,8 @@
 -[ INTRO ]-
 
   This is GxGeo 0.5 >= VERSION <= 1.0.
-  
+  The controls method have changed - see /gxgeo/confg/gngeorc
+  for more details.
   
 -[ THANKS TO ]-
 
@@ -43,7 +44,7 @@
   Your ROMs (zipped) and BIOS (unzipped) files should go in /sd/gxgeo/roms
   
     |---------------------------------------------------------|
-    |  FILE NAME (Required)   ||  AKA**         ||   CRC32    |
+    |  FILE NAME (Required)   ||  AKA**         ||  CRC32     |
     |-------------------------------------------||------------|
     |   000-lo.lo             ||   ng-lo.rom    ||  E09E253C  |
     |   sfix.sfx              ||   ng-sfix.rom  ||  354029FC  |

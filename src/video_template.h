@@ -47,7 +47,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     col=(myword>>0)&0xf; if (col) PUTPIXEL(br[0],paldata[col]);
                     col=(myword>>4)&0xf; if (col) PUTPIXEL(br[1],paldata[col]);
                     col=(myword>>8)&0xf; if (col) PUTPIXEL(br[2],paldata[col]);
@@ -56,7 +56,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                     col=(myword>>20)&0xf; if (col) PUTPIXEL(br[5],paldata[col]);
                     col=(myword>>24)&0xf; if (col) PUTPIXEL(br[6],paldata[col]);
                     col=(myword>>28)&0xf; if (col) PUTPIXEL(br[7],paldata[col]);
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     col=(myword>>0)&0xf; if (col) PUTPIXEL(br[8],paldata[col]);
                     col=(myword>>4)&0xf; if (col) PUTPIXEL(br[9],paldata[col]);
                     col=(myword>>8)&0xf; if (col) PUTPIXEL(br[10],paldata[col]);
@@ -81,7 +81,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                 for(y=0;y<zy;y++) {
                     
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     col=(myword>>0)&0xf; if (col) PUTPIXEL(br[0],paldata[col]);
                     col=(myword>>4)&0xf; if (col) PUTPIXEL(br[1],paldata[col]);
                     col=(myword>>8)&0xf; if (col) PUTPIXEL(br[2],paldata[col]);
@@ -90,7 +90,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                     col=(myword>>20)&0xf; if (col) PUTPIXEL(br[5],paldata[col]);
                     col=(myword>>24)&0xf; if (col) PUTPIXEL(br[6],paldata[col]);
                     col=(myword>>28)&0xf; if (col) PUTPIXEL(br[7],paldata[col]);
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     col=(myword>>0)&0xf; if (col) PUTPIXEL(br[8],paldata[col]);
                     col=(myword>>4)&0xf; if (col) PUTPIXEL(br[9],paldata[col]);
                     col=(myword>>8)&0xf; if (col) PUTPIXEL(br[10],paldata[col]);
@@ -118,7 +118,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     col=(myword>>28)&0xf; if (col) PUTPIXEL(br[0],paldata[col]);
                     col=(myword>>24)&0xf; if (col) PUTPIXEL(br[1],paldata[col]);
                     col=(myword>>20)&0xf; if (col) PUTPIXEL(br[2],paldata[col]);
@@ -128,7 +128,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                     col=(myword>>4)&0xf; if (col) PUTPIXEL(br[6],paldata[col]);
                     col=(myword>>0)&0xf; if (col) PUTPIXEL(br[7],paldata[col]);
 	      
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     col=(myword>>28)&0xf; if (col) PUTPIXEL(br[8],paldata[col]);
                     col=(myword>>24)&0xf; if (col) PUTPIXEL(br[9],paldata[col]);
                     col=(myword>>20)&0xf; if (col) PUTPIXEL(br[10],paldata[col]);
@@ -152,7 +152,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     col=(myword>>28)&0xf; if (col) PUTPIXEL(br[0],paldata[col]);
                     col=(myword>>24)&0xf; if (col) PUTPIXEL(br[1],paldata[col]);
                     col=(myword>>20)&0xf; if (col) PUTPIXEL(br[2],paldata[col]);
@@ -162,7 +162,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                     col=(myword>>4)&0xf; if (col) PUTPIXEL(br[6],paldata[col]);
                     col=(myword>>0)&0xf; if (col) PUTPIXEL(br[7],paldata[col]);
 	      
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     col=(myword>>28)&0xf; if (col) PUTPIXEL(br[8],paldata[col]);
                     col=(myword>>24)&0xf; if (col) PUTPIXEL(br[9],paldata[col]);
                     col=(myword>>20)&0xf; if (col) PUTPIXEL(br[10],paldata[col]);
@@ -191,7 +191,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     if (dda_x_skip[ 0]) {if ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[ 1]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[ 2]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
@@ -201,7 +201,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                     if (dda_x_skip[ 6]) {if  ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[ 7]) {if  ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
 
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     if (dda_x_skip[ 8]) {if  ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[ 9]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
                     if (dda_x_skip[10]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;}
@@ -221,7 +221,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
 #endif
                 for(y=0;y<zy;y++) {
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     if (dda_x_skip[ 0]) {if  ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 1]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 2]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -231,7 +231,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                     if (dda_x_skip[ 6]) {if  ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 7]) {if  ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
 
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     if (dda_x_skip[ 8]) {if  ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 9]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[10]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -256,7 +256,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                 for(y=0;y<zy;y++) {
 
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     if (dda_x_skip[ 0]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 1]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 2]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -266,7 +266,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                     if (dda_x_skip[ 6]) {if ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 7]) {if ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
 	      
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     if (dda_x_skip[ 8]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 9]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[10]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -287,7 +287,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                 for(y=0;y<zy;y++) {
 
                     gfxdata+=l_y_skip[l]<<1;
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
                     if (dda_x_skip[ 0]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 1]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 2]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -297,7 +297,7 @@ static __inline__ void RENAME(draw)(unsigned int tileno,int sx,int sy,int zx,int
                     if (dda_x_skip[ 6]) {if ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 7]) {if ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
 	      
-                    if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+                    if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
                     if (dda_x_skip[ 8]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[ 9]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
                     if (dda_x_skip[10]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -338,7 +338,7 @@ static inline void RENAME(draw_scanline)(unsigned int tileno,int yoffs,int sx,in
             br= (unsigned short *)bmp+(line)*(buffer.pitch>>1)+sx;
 #endif
 
-            if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+            if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
             col=(myword>>0)&0xf; if (col) PUTPIXEL(*br,paldata[col]); br++;
             col=(myword>>4)&0xf; if (col) PUTPIXEL(*br,paldata[col]); br++;
             col=(myword>>8)&0xf; if (col) PUTPIXEL(*br,paldata[col]); br++;
@@ -348,7 +348,7 @@ static inline void RENAME(draw_scanline)(unsigned int tileno,int yoffs,int sx,in
             col=(myword>>24)&0xf; if (col) PUTPIXEL(*br,paldata[col]); br++;
             col=(myword>>28)&0xf; if (col) PUTPIXEL(*br,paldata[col]); br++;
 
-            if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+            if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
             col=(myword>>0)&0xf; if (col) PUTPIXEL(*br,paldata[col]); br++;
             col=(myword>>4)&0xf; if (col) PUTPIXEL(*br,paldata[col]); br++;
             col=(myword>>8)&0xf; if (col) PUTPIXEL(*br,paldata[col]); br++;
@@ -363,7 +363,7 @@ static inline void RENAME(draw_scanline)(unsigned int tileno,int yoffs,int sx,in
 #else
             br= (unsigned short *)bmp+(line)*(buffer.pitch>>1)+sx;
 #endif
-            if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+            if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
             col=(myword>>28)&0xf; if (col) PUTPIXEL(*br,paldata[col]);br++; 
             col=(myword>>24)&0xf; if (col) PUTPIXEL(*br,paldata[col]);br++; 
             col=(myword>>20)&0xf; if (col) PUTPIXEL(*br,paldata[col]);br++; 
@@ -373,7 +373,7 @@ static inline void RENAME(draw_scanline)(unsigned int tileno,int yoffs,int sx,in
             col=(myword>>4)&0xf; if (col) PUTPIXEL(*br,paldata[col]);br++; 
             col=(myword>>0)&0xf; if (col) PUTPIXEL(*br,paldata[col]);br++; 
 	      
-            if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+            if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
             col=(myword>>28)&0xf; if (col) PUTPIXEL(*br,paldata[col]);br++; 
             col=(myword>>24)&0xf; if (col) PUTPIXEL(*br,paldata[col]);br++; 
             col=(myword>>20)&0xf; if (col) PUTPIXEL(*br,paldata[col]);br++; 
@@ -390,7 +390,7 @@ static inline void RENAME(draw_scanline)(unsigned int tileno,int yoffs,int sx,in
 #else
             br= (unsigned short *)bmp+(line)*(buffer.pitch>>1)+sx;
 #endif
-            if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+            if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
             if (dda_x_skip[ 0]) {if  ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[ 1]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[ 2]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -400,7 +400,7 @@ static inline void RENAME(draw_scanline)(unsigned int tileno,int yoffs,int sx,in
             if (dda_x_skip[ 6]) {if  ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[ 7]) {if  ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
 
-            if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+            if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
             if (dda_x_skip[ 8]) {if  ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[ 9]) {if  ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[10]) {if  ((col=((myword>>8)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -417,7 +417,7 @@ static inline void RENAME(draw_scanline)(unsigned int tileno,int yoffs,int sx,in
             br= (unsigned short *)bmp+(line)*(buffer.pitch>>1)+sx;
 #endif
 
-            if (!memory.gfx) myword = FIX_INT(gfxdata[0]); else myword = gfxdata[0];
+            if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[0]); else myword = gfxdata[0];
             if (dda_x_skip[ 0]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[ 1]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[ 2]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
@@ -427,7 +427,7 @@ static inline void RENAME(draw_scanline)(unsigned int tileno,int yoffs,int sx,in
             if (dda_x_skip[ 6]) {if ((col=((myword>>4)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[ 7]) {if ((col=((myword>>0)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
 	      
-            if (!memory.gfx) myword = FIX_INT(gfxdata[1]); else myword = gfxdata[1];
+            if (!memory.gfx) myword = /*FIX_INT*/(gfxdata[1]); else myword = gfxdata[1];
             if (dda_x_skip[ 8]) {if ((col=((myword>>28)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[ 9]) {if ((col=((myword>>24)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 
             if (dda_x_skip[10]) {if ((col=((myword>>20)&0xf))) PUTPIXEL(*br,paldata[col]);br++;} 

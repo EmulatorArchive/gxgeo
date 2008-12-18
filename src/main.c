@@ -174,6 +174,8 @@ DRIVER *list_rom_loop(char **romname)
 		
     Uint8 jbuttons[2][BUTTON_MAX];
     if (read_input(jbuttons, 1)) exit(0);
+    int i;
+    for (i = 0; i < BUTTON_MAX; i++) jbuttons[0][i] |= jbuttons[1][i];
     if (jbuttons[0][BUTTON_DOWN]) if (start++ >= count-1) start = count-1;
     if (jbuttons[0][BUTTON_UP]) start--;
     if (jbuttons[0][BUTTON_RIGHT]) {
@@ -220,6 +222,7 @@ int main(int argc, char **argv)
     Uint8 gui_res,gngeo_quit=0;
     char *country;
     char *system;
+    
 	  
     /* must be the first thing to do */
     fatInitDefault();	
@@ -232,11 +235,14 @@ int main(int argc, char **argv)
     cf_open_file(NULL);
     cf_init_cmd_line();
 	
-	atexit(return_to_wii_menu);
+    atexit(return_to_wii_menu);
     
     init_joystick();
     
-	printf ("\x1b[%d;%dH", 4, 0 );
+    player_channel[0]= CF_VAL(cf_get_item_by_name("player1"));
+    player_channel[1]= CF_VAL(cf_get_item_by_name("player2"));
+
+    printf("\x1b[%d;%dH", 4, 0);
   
   /* print vmode struct */
   /*
@@ -292,9 +298,10 @@ int main(int argc, char **argv)
     player_channel[0]= CF_VAL(cf_get_item_by_name("player1"));
     player_channel[1]= CF_VAL(cf_get_item_by_name("player2"));
     
+    
 		/* start emulation loop */
 	  if (conf.debug) debug_loop();
-	    else main_loop();
+	  else main_loop();
 		save_nvram(conf.game);
 		save_memcard(conf.game);
 		passed = false;
