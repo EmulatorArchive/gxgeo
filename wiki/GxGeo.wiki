@@ -1,0 +1,3 @@
+= Introduction =
+
+GxGeo is a port of the open-source GnGeo emulator, originally coded by pepone. 
