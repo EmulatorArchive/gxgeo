@@ -138,7 +138,7 @@ void cf_create_bool_item(char *name,char *help,char short_opt,bool def)
 {
     CONF_ITEM *t=create_conf_item(name,help,short_opt,NULL);
     t->type=CFT_BOOLEAN;
-    t->data.dt_bool.bool=def;
+    t->data.dt_bool.val=def;
     t->data.dt_bool.default_bool=def;
 }
 void cf_create_action_item(char *name,char *help,char short_opt,int (*action)(struct CONF_ITEM *self))

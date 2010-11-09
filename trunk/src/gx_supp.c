@@ -56,9 +56,9 @@ static u16 vwidth, vheight, oldvwidth, oldvheight;
 
 /* New texture based scaler */
 typedef struct tagcamera {
-	Vector pos;
-	Vector up;
-	Vector view;
+	guVector pos;
+	guVector up;
+	guVector view;
 } camera;
 
 static s16 square[] ATTRIBUTE_ALIGN(32) = {
