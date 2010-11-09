@@ -26,7 +26,7 @@ typedef struct CONF_ITEM {
 	    int default_val;
 	}dt_int;
 	struct {
-	    int bool;
+	    int val;
 	    int default_bool;
 	}dt_bool;
 	struct {
@@ -41,7 +41,7 @@ typedef struct CONF_ITEM {
     }data;
 }CONF_ITEM;
 
-#define CF_BOOL(t) t->data.dt_bool.bool
+#define CF_BOOL(t) t->data.dt_bool.val
 #define CF_VAL(t) t->data.dt_int.val
 #define CF_STR(t) t->data.dt_str.str
 #define CF_ARRAY(t) t->data.dt_array.array
