@@ -37,7 +37,7 @@ INCLUDES	:=
 
 CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE) \
 				-DWII -DGFX_MAN -DVERSION="\"1.0b-WII\"" \
-				-DDATA_DIRECTORY="\"fat:/gxgeo\"" \
+				-DDATA_DIRECTORY="\"sd:/gxgeo\"" \
 				-DWORDS_BIGENDIAN
 CXXFLAGS	=	$(CFLAGS)
 
@@ -121,7 +121,7 @@ clean:
 
 #----------------------------------------------------------------------------
 run:
-	wiiload $(TARGET).dol mslugx
+	wiiload $(TARGET).dol mslug
 
 #----------------------------------------------------------------------------
 package:
