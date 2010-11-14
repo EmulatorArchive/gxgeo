@@ -218,8 +218,6 @@ DRIVER *list_rom_loop(char **romname)
         if ( (jbuttons[0][BUTTON_A] || jbuttons[0][BUTTON_B]) && count )
         { 
             if (start < 0) start = 0;
-            printf("button a or button b: %d %d", count, start);
-            sleep(5);
             printf("\x1b[2J");
             dr = pdriver_list;
             drf = pdriver_path_list;
