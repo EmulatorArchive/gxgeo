@@ -238,7 +238,6 @@ DRIVER *list_rom_loop(char **romname)
             char *t = strrchr(tempstr,'.');
             *t = 0;
             *romname = tempstr;
-            exit(0);
             return (DRIVER*)dr->data;
         }
         VIDEO_WaitVSync();
