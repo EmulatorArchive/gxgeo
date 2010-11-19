@@ -162,6 +162,7 @@ DRIVER *list_rom_loop(char **romname)
         printf("\x1b[2J");
         printf ("\x1b[%d;%dH", row, 2 );
         printf ("Press HOME to EXIT, 1 or 2 to load a ROMSET");
+          
         row += 2;
         int count = 0;
         int first_row = row;
@@ -262,7 +263,14 @@ int main(int argc, char **argv)
     Uint8 gui_res, gngeo_quit=0;
     char *country;
     char *system;
+    u32 type;
+    u32 pad_probe;
     
+    /* loop vars */
+    u8 player_i = 0;
+    u8 gc_i = 0;
+    u8 gc_it = 0;
+    u8 found_pad = 0;
       
     /* must be the first thing to do */
     fatInitDefault();    
@@ -279,8 +287,42 @@ int main(int argc, char **argv)
     
     init_joystick();
     
-    player_channel[0]= CF_VAL(cf_get_item_by_name("player1"));
-    player_channel[1]= CF_VAL(cf_get_item_by_name("player2"));
+    player_channel[0] = CF_VAL(cf_get_item_by_name("player1"));
+    player_channel[1] = CF_VAL(cf_get_item_by_name("player2"));
+    
+    
+    /* auto mode */
+    if (player_channel[0] == -1 && player_channel[1] == -1)
+    {
+        pad_probe = PAD_ScanPads();
+        for (player_i = 0; player_i < 2; player_i++)
+        {
+            found_pad = 0;
+            /* Loop all the controllers */
+            for (gc_it = gc_i; gc_it < 4; gc_it++)
+            {
+                /* If a controller is found set it to the player */
+                if ((pad_probe & (1<<gc_it)) > 0)
+                {
+                    gc_i = gc_it+1;
+                    player_channel[player_i] = gc_i;
+                    found_pad = 1;
+                    break;
+                }
+            }
+        }
+        
+        if (found_pad == 0)
+        {
+            player_channel[player_i] = 0;
+        }
+
+    }
+
+    if (player_channel[0] == -1)
+        player_channel[0] = 0;
+    if (player_channel[1] == -1)
+        player_channel[1] = 0;
 
     printf("\x1b[%d;%dH", 4, 0);
   
@@ -362,11 +404,7 @@ int main(int argc, char **argv)
         {
             conf.sound=0;
         }
-        
-        player_channel[0]= CF_VAL(cf_get_item_by_name("player1"));
-        player_channel[1]= CF_VAL(cf_get_item_by_name("player2"));
-    
-    
+           
         /* start emulation loop */
         if (conf.debug)
         {
