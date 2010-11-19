@@ -128,11 +128,16 @@ int read_mask_input_gc(unsigned int gcpad, int *data)
   PAD_ScanPads();
   u16 pressedgc = PAD_ButtonsHeld(gcpad);
 
-  double x_pos = 2*((double)(PAD_StickX(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
-  double y_pos = 2*((double)(PAD_StickY(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
-  double cx_pos = 2*((double)(PAD_SubStickX(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
-  double cy_pos = 2*((double)(PAD_SubStickY(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
-
+  //~ double x_pos = 2*((double)(PAD_StickX(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
+  //~ double y_pos = 2*((double)(PAD_StickY(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
+  //~ double cx_pos = 2*((double)(PAD_SubStickX(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
+  //~ double cy_pos = 2*((double)(PAD_SubStickY(gcpad) + 0x80) / (double)(0xFF)) - 1.0;
+  
+  s8 x_pos = PAD_StickX(gcpad);
+  s8 y_pos = PAD_StickY(gcpad);
+  s8 cx_pos = PAD_SubStickX(gcpad);
+  s8 cy_pos = PAD_SubStickY(gcpad);
+  
   *data       |= ( pressedgc & PAD_BUTTON_A?GCA:0 );
   *data       |= ( pressedgc & PAD_BUTTON_B?GCB:0 );
   *data       |= ( pressedgc & PAD_BUTTON_X?GCX:0 );
@@ -141,16 +146,16 @@ int read_mask_input_gc(unsigned int gcpad, int *data)
   *data       |= ( pressedgc & PAD_TRIGGER_R?GCRTRIG:0 );
   *data       |= ( pressedgc & PAD_TRIGGER_L?GCLTRIG:0 );
   *data       |= ( pressedgc & PAD_BUTTON_MENU?GCSTART:0 );
-  *data       |= ( (y_pos >= 0.5)?GCSUP:0 );
-  *data       |= ( (y_pos <= -0.5)?GCSDOWN:0 );
-  *data       |= ( (x_pos <= -0.5)?GCSLEFT:0 );
-  *data       |= ( (x_pos >= 0.5)?GCSRIGHT:0 );
-  *data       |= ( (cy_pos >= 0.5)?GCCUP:0 );
-  *data       |= ( (cy_pos <= -0.5)?GCCDOWN:0 );
-  *data       |= ( (cx_pos <= -0.5)?GCCLEFT:0 );
-  *data       |= ( (cx_pos >= 0.5)?GCCRIGHT:0 );
-  *data       |= ( pressedgc & PAD_BUTTON_DOWN?GCDUP:0 );
-  *data       |= ( pressedgc & PAD_BUTTON_UP?GCDDOWN:0 );
+  *data       |= ( (y_pos >= 70)?GCSUP:0);
+  *data       |= ( (y_pos <= -70)?GCSDOWN:0 );
+  *data       |= ( (x_pos <= -70)?GCSLEFT:0 );
+  *data       |= ( (x_pos >= 70)?GCSRIGHT:0 );
+  *data       |= ( (cy_pos >= 70)?GCCUP:0 );
+  *data       |= ( (cy_pos <= -70)?GCCDOWN:0 );
+  *data       |= ( (cx_pos <= -70)?GCCLEFT:0 );
+  *data       |= ( (cx_pos >= 70)?GCCRIGHT:0 );
+  *data       |= ( pressedgc & PAD_BUTTON_UP?GCDUP:0 );
+  *data       |= ( pressedgc & PAD_BUTTON_DOWN?GCDDOWN:0 );
   *data       |= ( pressedgc & PAD_BUTTON_LEFT?GCDLEFT:0 );
   *data       |= ( pressedgc & PAD_BUTTON_RIGHT?GCDRIGHT:0 );
   return GCPAD;
@@ -172,9 +177,13 @@ int read_input(unsigned char joy[2][BUTTON_MAX], int held)
     int touse = 0;  
     
     /* Read current state of keys on channel */
-    if (player_channel[player] > 4 || player_channel[player] < 0) player_channel[player] = 0;
-    if (player_channel[player] == 0) touse = read_mask_input_wiimote(wii_channel++, &keys);
-    else touse = read_mask_input_gc(player_channel[player]-1, &keys);
+    if (player_channel[player] > 4 || player_channel[player] < 0) 
+        player_channel[player] = 0;
+        
+    if (player_channel[player] == 0)
+        touse = read_mask_input_wiimote(wii_channel++, &keys);
+    else
+        touse = read_mask_input_gc(player_channel[player]-1, &keys);
     
     /* check to see if keys have changed, if required */
     if (held) {
@@ -198,7 +207,8 @@ int read_input(unsigned char joy[2][BUTTON_MAX], int held)
     if (to_exit) return 1;
       
     /* touse is -1 when a channel is not connected, touse is the index of the array of controls */
-    for (i = 0; i < BUTTON_MAX; i++) joy[player][i] = ((keys & joy_touse[touse][i]) != 0?1:0);
+    for (i = 0; i < BUTTON_MAX; i++)
+        joy[player][i] = ((keys & joy_touse[touse][i]) != 0?1:0);
   }
   
   return 0;

@@ -62,7 +62,7 @@ unsigned int   CLASSIC_DEFAULT[]   = { CLB, CLA, CLX, CLY, CLEUP, CLEDOWN, CLELE
 
 char *GCPAD_BUTTONS[]   = { "A", "B", "X", "Y", "Z", "START", "STICK_UP",  "STICK_DOWN",  "STICK_LEFT",  "STICK_RIGHT", "CSTICK_UP", "CSTICK_DOWN", "CSTICK_LEFT", "CSTICK_RIGHT", "DPAD_UP" "DPAD_DOWN" "DPAD_LEFT" "DPAD_RIGHT" };
 unsigned int   GCPAD_MASK[]      = { GCA, GCB, GCX, GCY, GCZ, GCSTART, GCSUP, GCSDOWN, GCSLEFT, GCSRIGHT, GCCUP, GCCDOWN, GCCLEFT, GCCRIGHT, GCDUP, GCDDOWN, GCDLEFT, GCDRIGHT };
-unsigned int   GCPAD_DEFAULT[]   = { GCB, GCA, GCX, GCY, GCSUP, GCSDOWN, GCSLEFT, GCSRIGHT, GCSTART, GCZ };
+unsigned int   GCPAD_DEFAULT[]   = { GCB, GCA, GCX, GCY, GCEUP, GCEDOWN, GCELEFT, GCERIGHT, GCSTART, GCZ };
 
 static struct {
     CONF_ITEM **conf;
@@ -349,8 +349,8 @@ void cf_init(void)
     cf_create_array_item("gcpad_key","Gamecube Controller Key configuration",0,BUTTON_MAX, GCPAD_DEFAULT);
     
     /* 0 = Wiimote, 1 = 1st GC, 2 = 2nd GC, etc. up to 4 */
-    cf_create_int_item("player1","Player One controller option",0,0);
-    cf_create_int_item("player2","Gamecube Controller Key configuration",0,0);
+    cf_create_int_item("player1","Player One controller option", 0, -1);
+    cf_create_int_item("player2","Gamecube Controller Key configuration", 0, -1);
     
     /*
     cf_create_array_item("p1key","Player1 Keyboard configuration",0,14,default_key1);
