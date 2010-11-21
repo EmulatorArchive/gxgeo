@@ -6,11 +6,11 @@
 This is the current road map for development.
 
 = Milestones =
-  * [GxGeov10 GxGeo v1.0] - Large ROM support (early January)
-  * [GxGeov15 GxGeo v1.5] - Maintenance (mid February)
-  * [GxGeov20 GxGeo v2.0] - Menu system implemented (mid March)
-  * [GxGeov30 GxGeo v3.0] - Merged with gngeo (late May)
-  * [GxGeov35 GxGeo v3.5] - New front-end implementation (mid July)
+  * [GxGeo10 GxGeo v1.0] - Large ROM support (early January)
+  * [GxGeo15 GxGeo v1.5] - Maintenance (mid February)
+  * [GxGeo20 GxGeo v2.0] - Menu system implemented (mid March)
+  * [GxGeo30 GxGeo v3.0] - Merged with gngeo (late May)
+  * [GxGeo35 GxGeo v3.5] - New front-end implementation (mid July)
 
 == Dependencies == 
 
