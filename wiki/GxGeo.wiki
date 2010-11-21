@@ -1,4 +1,4 @@
-#summary About the GxGeo project
+#summary About the GxGeo project.
 
 = Introduction =
 
