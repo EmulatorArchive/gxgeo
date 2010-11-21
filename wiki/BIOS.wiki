@@ -1,4 +1,4 @@
-#summary Details about the BIOS Files
+#summary Details about the BIOS Files.
 
 = BIOS Files =
 
