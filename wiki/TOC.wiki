@@ -1,2 +1,7 @@
+#summary The table of contents for this Wiki.
  * [GxGeo GxGeo]
-    * [DevelopmentRoadmap Development Roadmap]
+    * [Installation Installation]
+    * [BugReporting Bug Reporting]
+    * [BIOS BIOS Files]
+    * [DevelopmentRoadmap Development Road Map]
+  
