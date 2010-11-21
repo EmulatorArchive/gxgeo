@@ -1,4 +1,4 @@
-#summary The road map for development
+#summary The road map for development.
 #labels Phase-Design
 
 = Introduction =
