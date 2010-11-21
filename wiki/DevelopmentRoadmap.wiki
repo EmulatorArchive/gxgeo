@@ -1,9 +1,9 @@
-#summary The road map for development.
+#summary The roadmap for development.
 #labels Phase-Design
 
 = Introduction =
 
-This is the current road map for development.
+This is the current roadmap for development.
 
 = Milestones =
   * [GxGeo10 GxGeo v1.0] - Large ROM support (early January)
