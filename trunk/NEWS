@@ -2,15 +2,19 @@
  * GxGeo                                                    *
  *   by Blizzo                                              *
  ************************************************************/
+
+ 20101119-r23
+  GameCube controllers work again
+  SDHC support is working
  
- 20081212-R3
+ 20081212-r3
   Full screen? (testing required)
   Return to ROM list after ingame quit.
   Return to loader or restart wii.
   
- 20081124-R2
+ 20081124-r2
   Memory Loading bug fixes
   
- 20081123-R1
+ 20081123-r1
   Initial release
  
