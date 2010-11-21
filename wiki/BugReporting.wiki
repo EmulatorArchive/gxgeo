@@ -1,6 +1,6 @@
 #summary How to report bugs.
 
-== Testing ==
+== Bug Reporting ==
  * *Please remember this is an early version and there are some bugs!*
  * When you find a bug (and you will) post it on the [http://code.google.com/p/gxgeo/issues/list Issues] page along with your Wii Region/Video Mode, etc.
  * You can check the [http://code.google.com/p/gxgeo/issues/list Issues] page for bugs that are already known.
