@@ -1,33 +1,22 @@
 /************************************************************
- * GxGeo                                                    *
+ * GxGeo 20101119                                           *
  *   by Blizzo                                              *
  ************************************************************/
  
 -[ INTRO ]-
 
-  This is GxGeo 0.5 >= VERSION <= 1.0.
-  The controls method have changed - see /gxgeo/confg/gngeorc
-  for more details.
-  
+  Home Page: http://blizzo.co.uk/gxgeo
+  Download: http://code.google.com/p/gxgeo/downloads/list
+  Source: http://code.google.com/p/gxgeo/source/checkout
+
+
 -[ THANKS TO ]-
 
   Pepone      for gngeo & testing :D
   djdynamite  for testing :]
   softdev     for GX scaling stuff :)
-  you         for helping me take over the world...
-  
 
--[ SOURCE CODE ]-
 
-  I'd rather not release messy source code with probably more 
-  than a few mistakes in it, but if you you'd like it drop me
-  a line on:
-    http://wiinewz.com/forums/members/blizzo.html or
-    http://gbatemp.net/index.php?showuser=142966&CODE=1337 or
-    http://www.dcemu.co.uk/vbulletin/member.php?u=39336648 or
-    email me at Z3hnZW9AYmVhcmR5bWF0dC5jby51ayA= ;)
-    
- 
 -[ INSTALLATION ]-
 
   Extract the zip on to your SD card :
@@ -64,8 +53,8 @@
     
   **Some times the files have different names, so you have to
     rename them to match the names on the left.
-    
-    
+
+
 -[ CONTROLS ]-
 
   You can use any of the following:
@@ -76,8 +65,8 @@
 
   The quit button returns you to the ROM list.
   
-  The wiimotes are the default controls, if you would like to use
-  the game cube controller see the /gxgeo/conf/gngeorc file
+  If you have GameCube controllers plugged in they will be used in
+  preference over any Wii Remotes that are connected.
   
   |------------------------------------------------------|
   | NeoGeo || Wiimote  | Wiimote  | Classic    | GC  PAD |
