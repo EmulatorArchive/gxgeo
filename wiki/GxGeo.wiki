@@ -1,4 +1,5 @@
 #summary About the GxGeo project.
+#labels Featured
 
 = Introduction =
 
