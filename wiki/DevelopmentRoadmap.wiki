@@ -13,5 +13,5 @@ This is the current roadmap for development.
   * [GxGeo35 GxGeo v3.5] - New front-end implementation (mid July)
 
 == Dependencies == 
-
+Here is a high-level dependency graph, it shows what needs to be completed in order to reach certain milestones (in grey). For each item them is a title, task id, story point estimate and resource (who the task is allocated to).<br />
 [http://gxgeo.googlecode.com/svn/trunk/docs/roadmap.png]
