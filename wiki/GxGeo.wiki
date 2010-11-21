@@ -1,0 +1,9 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+GxGeo is an open source [http://en.wikipedia.org/wiki/Neo_Geo_(console) Neo-Geo] Emulator for the "Nintendo Wii™", it is based on [http://gngeo.berlios.de/ GnGeo] by Mathieu Peponas. The main author is [http://www.mmcj.co.uk Matt Jeffery]. Development began in Aug 2008 and the first release was made in Nov 2008. The project was suspended in Jan 2009, however as of Oct 2010 work has resumed and a new version was release in Nov 2010.
+
+== Demo ==
+
+<wiki:video url="http://www.youtube.com/watch?v=hP49OKZn4p8"/>
